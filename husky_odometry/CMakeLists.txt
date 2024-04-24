@@ -15,10 +15,21 @@ find_package(catkin REQUIRED COMPONENTS
   message_generation
 )
 
+add_message_files(
+  FILES
+  DistanceAndOrientation.msg
+)
+
+generate_messages(
+  DEPENDENCIES
+  std_msgs  # include other package messages if available
+)
+
+
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES husky_odometry
-#  CATKIN_DEPENDS nav_msgs roscpp rospy tf
+ CATKIN_DEPENDS message_runtime nav_msgs roscpp rospy tf
 #  DEPENDS system_lib
 )
 
@@ -26,16 +37,9 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-add_message_files(
-  FILES
-  DistanceAndOrientation.msg
-)
-
-generate_message(
-  DEPENDENCIES
-  std_msgs  # include other package messages if available
-)
 
 add_executable(odom_listener src/odom_listener.cpp)
 target_link_libraries(odom_listener ${catkin_LIBRARIES})
+add_executable(odom_listener_with_new_custom_msg_and_topic src/odom_listener_with_new_custom_msg_and_topic.cpp)
+target_link_libraries(odom_listener_with_new_custom_msg_and_topic ${catkin_LIBRARIES})
 

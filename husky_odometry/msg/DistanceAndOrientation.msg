@@ -1,2 +1,2 @@
 float64 distance
-float64 orientation_degree
+float64 orientation_degrees
